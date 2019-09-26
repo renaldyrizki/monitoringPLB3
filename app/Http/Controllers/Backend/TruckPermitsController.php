@@ -273,7 +273,7 @@ class TruckPermitsController extends Controller{
         $data = Truck::findOrFail($id);
         $ListFile = array("izin_pengangkutan_file", "dokumen_lingkungan_file", "mou_file", "kartu_pengawasan_file");
         $zip = new ZipArchive();
-        $zip_name = "downloads/Lampiran_TruckPermits_".$data->no_polisi.".zip"; // Zip name
+        $zip_name = "uploads/Lampiran_TruckPermits_".$data->no_polisi.".zip"; // Zip name
         $zip->open($zip_name,  ZipArchive::CREATE);
         foreach ($ListFile as $file) {
             if(file_exists($data[$file])){

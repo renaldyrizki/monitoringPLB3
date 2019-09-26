@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Excel as MaatExcel;
+use Excel;
 use DB;
 use Date;
 // use App\User;
@@ -176,6 +176,21 @@ class PenyimpananLimbahB3Controller extends Controller{
         $first_day_this_month = date('Y-m-01');
         $last_day_this_month  = date('Y-m-t');
         $data = penyimpananLimbah::whereBetween('tanggal_expired', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_expired', 'ASC')->get();
+        
+        Excel::create('Filename', function($excel) {
+            $excel->sheet('Sheet 1',function($sheet){
+                $sheet->fromArray([['A','B'],['C','D']]);
+            });
+            // Set the title
+            $excel->setTitle('Our new awesome title');
+            
+            // Chain the setters
+            $excel->setCreator('Maatwebsite')
+                  ->setCompany('Maatwebsite');
+            
+              // Call them separately
+              $excel->setDescription('A demonstration to change the file properties');
+            })->download('xls');
         // return $data;
         // MaatExcel::create('Filename', function($excel) {
         //     $excel->setTitle("ThisTitle")->setCreator("siGanteng");
@@ -187,7 +202,7 @@ class PenyimpananLimbahB3Controller extends Controller{
         //         ));
         //     });
         // })->export('xls');
-        MaatExcel::download(['a','b'],'hitut.xlsx');
+        // MaatExcel::download(['a','b'],'hitut.xlsx');
         // MaatExcel::create("Customers", function ($excel){
         //     $excel->setTitle("Example Sheet");
         //     $excel->sheet("Sheet 1", function ($sheet){
