@@ -1,0 +1,41 @@
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ecf0f5;
+}
+.table>thead>tr>th {
+    border-bottom: 1px solid black;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    border-top: 1px solid #333333a6;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3c8dbc66;
+}
+
+.bg-green, .callout.callout-success, .alert-success, .label-success, .modal-success .modal-body {
+    background-color: #00a65acf !important;
+}
+
+.alert-success {
+    border-color: #ecf0f5;
+}
+
+.alert {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    right: 0px;
+}
+.card {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
