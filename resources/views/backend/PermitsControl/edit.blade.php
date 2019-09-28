@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="icon fa fa-check"></i> {{ session('success') }}
+        </div>
+    @endif
     <form action="{{ route('backend::permitsControl_update', ['id' => $data->id_permits]) }}" class="form-horizontal" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PATCH">

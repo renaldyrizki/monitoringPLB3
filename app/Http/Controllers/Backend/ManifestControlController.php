@@ -1,16 +1,10 @@
 <?php
 namespace App\Http\Controllers\Backend;
 
-/*
- * @Author      : Ferdhika Yudira 
- * @Date        : 2017-07-18 14:17:32 
- * @Web         : http://dika.web.id
- * @FileName    : HomeController.php
- */
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\pengangkutanLimbah;
 
 class ManifestControlController extends Controller{

@@ -5,10 +5,12 @@
 @endsection
 
 @section('content')
-    {{-- Welcome {{ Auth::user()->name }} --}}
-    {{-- <h3>Tambah Truck</h3> --}}
-    {{-- <hr style="border-top-color: black"> --}}
-
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <i class="icon fa fa-check"></i> {{ session('success') }}
+    </div>
+@endif
 <form action="{{ route('backend::pengangkutanLimbahB3_update', ['id' => $data->id_pengangkutan]) }}" class="form-horizontal" method="post">
     {{ csrf_field() }}
     <input name="_method" type="hidden" value="PATCH">

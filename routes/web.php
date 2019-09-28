@@ -30,8 +30,7 @@ $router->group([
     
     // Dashboard
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    Route::get('/about', 'HomeController@about')->name('about');
-    Route::get('/about2', 'HomeController@about')->name('about2');
+    Route::get('/kirimEmail','EmailController@index')->name('kirimEmail');
     // Route::get('/permitsControl', 'HomeController@permitsControl')->name('permitsControl');
     // Route::get('/mouControl', 'HomeController@mouControl')->name('mouControl');
     // Route::get('/tambahTruck', 'TruckPermitsController@tambahTruck')->name('tambahTruck');
@@ -43,16 +42,16 @@ $router->group([
     Route::get('/manifestControl/{id}/edit', 'ManifestControlController@edit')->name('manifestControl_edit');
     Route::patch('/manifestControl/{id}/edit', 'ManifestControlController@update')->name('manifestControl_update');
     Route::delete('/manifestControl/{id}/delete', 'ManifestControlController@delete')->name('manifestControl_delete');
-
+    
     //mou Control
-    // Route::get('/truckPermits', 'TruckPermitsController@index')->name('truckPermits');
-    // Route::get('/truckPermits/tambah', 'TruckPermitsController@add')->name('truckPermits_add');
-    // Route::post('/truckPermits/', 'TruckPermitsController@save')->name('truckPermits_save');
-    // Route::get('/truckPermits/{id}/edit', 'TruckPermitsController@edit')->name('truckPermits_edit');
-    // Route::patch('/truckPermits/{id}/edit', 'TruckPermitsController@update')->name('truckPermits_update');
-    // Route::delete('/truckPermits/{id}/delete', 'TruckPermitsController@delete')->name('truckPermits_delete');
-    // Route::get('/truckPermits/download/{lampiran}/{id}/', 'TruckPermitsController@download')->name('truckPermits_download');
-    // Route::get('/truckPermits/downloads/{id}/', 'TruckPermitsController@downloads')->name('truckPermits_downloads');
+    Route::get('/mouControl', 'MouControlController@index')->name('mouControl');
+    Route::get('/mouControl/tambah', 'MouControlController@add')->name('mouControl_add');
+    Route::post('/mouControl/', 'MouControlController@save')->name('mouControl_save');
+    Route::get('/mouControl/{id}/edit', 'MouControlController@edit')->name('mouControl_edit');
+    Route::patch('/mouControl/{id}/edit', 'MouControlController@update')->name('mouControl_update');
+    Route::delete('/mouControl/{id}/delete', 'MouControlController@delete')->name('mouControl_delete');
+    Route::get('/mouControl/download/{lampiran}/{id}/', 'MouControlController@download')->name('mouControl_download');
+    Route::get('/mouControl/downloads/{id}/', 'MouControlController@downloads')->name('mouControl_downloads');
     
     //Truck Control
     Route::get('/truckPermits', 'TruckPermitsController@index')->name('truckPermits');

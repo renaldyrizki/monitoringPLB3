@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="icon fa fa-check"></i> {{ session('success') }}
+        </div>
+    @endif
     <form action="{{ route('backend::penyimpananLimbahB3_save') }}" class="form-horizontal" method="post">
         {{ csrf_field() }}
         <div class="form-group" row>
