@@ -20,6 +20,7 @@ class CreatePenyimpananLimbahTabel extends Migration
             $table->date('tanggal_expired');
             $table->string('sumber_limbah');
             $table->integer('total_penyimpanan');
+            $table->integer('plant_id');
         });
     }
 

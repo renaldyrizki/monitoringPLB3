@@ -50,6 +50,8 @@ class AddTruckTable extends Migration
             $table->date('kartu_pengawasan_tanggal_terbit')->nullable();
             $table->date('kartu_pengawasan_tanggal_habis')->nullable();
             $table->string('kartu_pengawasan_file')->nullable();
+            
+            $table->integer('plant_id');
         });
     }
 
