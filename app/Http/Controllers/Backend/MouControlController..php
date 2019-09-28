@@ -49,7 +49,7 @@ class MouControlController extends Controller{
         $mou = new mouControl;
         $queries = [];
         if($request->has('kata_kunci')){
-            $mou = $mou->where('perusahaan_pengelola_lanjut','like', "%".$request->cari."%");
+            $mou = $mou->where('perusahaan_pengelola_lanjut','like', "%".$request->kata_kunci."%");
             
             $queries['perusahaan_pengelola_lanjut'] = $request->cari;
         }
@@ -191,7 +191,7 @@ class MouControlController extends Controller{
                                  'Filter Bekas (B110d)', 'Coolant Bekas (A345-1)'];
         $data['data'] = mouControl::findOrFail($id);
 
-        return view('backend.PermitsControl.edit', $data); 
+        return view('backend.MouControl.edit', $data); 
     }
 
     public function update($id, Request $request){
@@ -226,9 +226,9 @@ class MouControlController extends Controller{
             "tanggal_habis_berlaku_kontrak"=> 'date|required',
             "lampiran_kontrak" => 'mimes:pdf|nuallable',
         ]);
-
-        $mouControl = mouControl::findOrFail($id);
+        $MouControl = mouControl::findOrFail($id);
         $MouControl->nomor_kontrak = $request->nomor_kontrak;
+        // return $MouControl;
         $ListFile = array("surat_pernyataan_tidak_masalah", "lampiran_perusahaan", "lampiran_kontrak");
         
         foreach ($ListFile as $File) {
@@ -245,9 +245,9 @@ class MouControlController extends Controller{
 
         $jenis_limbah = "";
             foreach($request->jenis_limbah as $jl){
-                $jenis_limbah = $jenis_limbah."_".$jenis_limbah[$jl];
+                $jenis_limbah = $jenis_limbah."_".$data['jenis_limbah'][$jl];
         }
-        $MouControl->tipe_pengelolaan = $tipe_pengelolaan[$request->tipe_pengelolaan];
+        $MouControl->tipe_pengelolaan = $data['tipe_pengelolaan'][$request->tipe_pengelolaan];
         $MouControl->perusahaan_pengelola_lanjut = $request->perusahaan_pengelola_lanjut;
         $MouControl->status_kontrak = $request->status_kontrak;
         $MouControl->jenis_limbah = $jenis_limbah;

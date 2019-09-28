@@ -16,9 +16,9 @@
         <input name="_method" type="hidden" value="PATCH">
         <h3 style="text-align: center">Data Kontrak Kerjasama</h3>
         <div class="form-group">
-            <label for="perusahaan_lebih_lanjut" class="col-sm-2 control-label">Nama Perusahaan Lebih Lanjut</label>
+            <label for="perusahaan_pengelola_lanjut" class="col-sm-2 control-label">Nama Perusahaan Lebih Lanjut</label>
             <div class="col-sm-6">
-                <input required type="text" name="perusahaan_lebih_lanjut" id="perusahaan_lebih_lanjut" class="form-control" value="{{ (!empty($data))? $data->perusahaan_lebih_lanjut : '' }}" placeholder="Nama Perusahaan Lebih Lanjut">
+                <input required type="text" name="perusahaan_pengelola_lanjut" id="perusahaan_pengelola_lanjut" class="form-control" value="{{ (!empty($data))? $data->perusahaan_pengelola_lanjut : '' }}" placeholder="Nama Perusahaan Pengelola Lebih Lanjut">
             </div>
         </div>
         <div class="form-group" row>
@@ -55,7 +55,7 @@
         <div class="form-group">
             <label for="surat_pernyataan_tidak_masalah" class="col-sm-2 control-label">Surat Pernyataan Tidak Memiliki Masalah Lingkungan</label>
             <div class="col-sm-6">
-                <input required type="file" accept="application/pdf" id="surat_pernyataan_tidak_masalah" name="surat_pernyataan_tidak_masalah" class="form-control">
+                <input type="file" accept="application/pdf" id="surat_pernyataan_tidak_masalah" name="surat_pernyataan_tidak_masalah" class="form-control">
                 <small>
                     *File yang boleh diupload hanya file bertipe pdf.<br>
                     *Max size 2MB.
@@ -64,9 +64,9 @@
         </div>
         <h3 style="text-align: center">Perizinan Perusahaan Pengelola Lanjut</h3>
         <div class="form-group">
-            <label for="no_izin" class="col-sm-2 control-label">No Izin</label>
+            <label for="nomor_izin_perusahaan" class="col-sm-2 control-label">No Izin</label>
             <div class="col-sm-6">
-                <input required type="text" name="no_izin" id="no_izin" class="form-control" value="{{ (!empty($data))? $data->no_izin : '' }}" placeholder="No Izin">
+                <input required type="text" name="nomor_izin_perusahaan" id="nomor_izin_perusahaan" class="form-control" value="{{ (!empty($data))? $data->nomor_izin_perusahaan : '' }}" placeholder="No Izin">
             </div>
         </div>
     
@@ -88,7 +88,7 @@
         <div class="form-group">
             <label for="lampiran_perusahaan" class="col-sm-2 control-label">Lampiran</label>
             <div class="col-sm-6">
-                <input required type="file" accept="application/pdf" id="lampiran_perusahaan" name="lampiran_perusahaan" class="form-control">
+                <input type="file" accept="application/pdf" id="lampiran_perusahaan" name="lampiran_perusahaan" class="form-control">
                 @if($data->lampiran_perusahaan)
                     <a href="{{ route('backend::mouControl_download', ['id' => $data->id_mou, 'lampiran' => 'lampiran_perusahaan']) }}"><u>Download File Saat Ini</u></a><br>
                 @endif
@@ -124,7 +124,7 @@
         <div class="form-group">
             <label for="lampiran_kontrak" class="col-sm-2 control-label">Lampiran</label>
             <div class="col-sm-6">
-                <input required type="file" accept="application/pdf" id="lampiran_kontrak" name="lampiran_kontrak" class="form-control">
+                <input type="file" accept="application/pdf" id="lampiran_kontrak" name="lampiran_kontrak" class="form-control">
                 @if($data->lampiran_kontrak)
                     <a href="{{ route('backend::mouControl_download', ['id' => $data->id_mou, 'lampiran' => 'lampiran_kontrak']) }}"><u>Download File Saat Ini</u></a><br>
                 @endif

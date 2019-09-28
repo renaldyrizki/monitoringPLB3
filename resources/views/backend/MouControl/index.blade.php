@@ -11,11 +11,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                  @if (session('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="icon fa fa-check"></i> {{ session('success') }}
-                </div>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="icon fa fa-check"></i> {{ session('success') }}
+                    </div>
                 @endif
                 <div id="filter" style="margin-top: 0.1in; margin-bottom: 0.1in;">
                     <form class="form-inline" action="{{ route('backend::mouControl') }}" method="GET">
