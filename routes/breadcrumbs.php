@@ -73,3 +73,11 @@ Breadcrumbs::register('pengangkutanLimbahB3_tabelData', function($breadcrumbs){
 //     $breadcrumbs->parent('LogbookLimbahB3');
 //     $breadcrumbs->push('Tabel Data Limbah B3', route('backend::logbookLimbahB3'));
 // });
+
+Breadcrumbs::register('manajemenPengguna', function($breadcrumbs){
+    $breadcrumbs->push('Manajemen Pengguna', route('backend::manajemenPengguna'));
+});
+
+Breadcrumbs::register('manajemenPengguna_add', function($breadcrumbs){
+    $breadcrumbs->push('Tambah Data', route('backend::manajemenPengguna_add'));
+});

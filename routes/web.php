@@ -86,4 +86,13 @@ $router->group([
     Route::patch('/pengangkutanLimbahB3/{id}/edit', 'PengangkutanLimbahB3Controller@update')->name('pengangkutanLimbahB3_update');
     Route::delete('/pengangkutanLimbahB3/{id}/delete', 'PengangkutanLimbahB3Controller@delete')->name('pengangkutanLimbahB3_delete');
     Route::get('/pengangkutanLimbahB3/logbook/', 'PengangkutanLimbahB3Controller@logbookDownload')->name('pengangkutanLimbahB3_logbook');
+
+    // manajemen pengguna
+    Route::get('/user', 'ManajemenPenggunaController@index')->name('manajemenPengguna');
+    Route::get('/user/tambah', 'ManajemenPenggunaController@add')->name('manajemenPengguna_add');
+    Route::post('/user/', 'ManajemenPenggunaController@save')->name('manajemenPengguna_save');
+    Route::get('/user/{id}/edit', 'ManajemenPenggunaController@edit')->name('manajemenPengguna_edit');
+    Route::patch('/user/{id}/edit', 'ManajemenPenggunaController@update')->name('manajemenPengguna_update');
+    Route::delete('/user/{id}/delete', 'ManajemenPenggunaController@delete')->name('manajemenPengguna_delete');
+
 });

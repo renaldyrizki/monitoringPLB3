@@ -28,6 +28,7 @@ class CreateMouTable extends Migration
             $table->date('tanggal_terbit_kontrak');
             $table->date('tanggal_habis_berlaku_kontrak');
             $table->string('lampiran_kontrak');
+            $table->integer('plant_id');
             $table->timestamps();
         });
     }

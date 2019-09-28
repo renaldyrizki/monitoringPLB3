@@ -23,6 +23,7 @@ class CreatePermitsControlTable extends Migration
             $table->date('tanggal_terbit');
             $table->date('tanggal_habis_berlaku');
             $table->string('lampiran_dokumen')->nullable();
+            $table->integer('plant_id');
         });
     }
 
