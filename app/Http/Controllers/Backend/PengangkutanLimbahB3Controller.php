@@ -34,9 +34,14 @@ class PengangkutanLimbahB3Controller extends Controller{
     public function index(){
         $data['page_name'] = "Pengangkutan Limbah B3";
         $data['page_description'] = "Tabel Data";
-        $model = pengangkutanLimbah::paginate(2);
+        if(Auth::user()->isAdmin == 1){
+            $model = pengangkutanLimbah::where('plant_id', Auth::user()->plant_id)->orderBy('id_pengangkutan', 'desc')->paginate(10);
+        }else{
+            $model = pengangkutanLimbah::orderBy('id_pengangkutan', 'desc')->paginate(10);
+        }
+        // $model = pengangkutanLimbah::paginate(2);
         $data['data'] = $model;
-        $data['allData'] = pengangkutanLimbah::get();
+        // $data['allData'] = pengangkutanLimbah::get();
 
         // return view('backend.TruckPermits.form', ['data' => $data]);
         return view('backend.PengangkutanLimbahB3.index', $data);
@@ -87,6 +92,7 @@ class PengangkutanLimbahB3Controller extends Controller{
         $pengangkutanLimbah->perusahaan_pengangkut = $request->perusahaan_pengangkut;
         $pengangkutanLimbah->tujuan_pemanfaatan = $request->tujuan_pemanfaatan;
         $pengangkutanLimbah->status_pengangkutan = FALSE;
+        $pengangkutanLimbah->plant_id = Auth::user()->plant_id;
         
         // return $penyimpananLimbah;
         $cek1 = $pengangkutanLimbah->save();

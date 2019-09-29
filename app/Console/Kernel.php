@@ -24,8 +24,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // $data['nama'] = 'renaldy';
+		// $data['link'] = route('backend::mouControl');
+		// $data['contact_email'] = "frein.diana@daihatsu.astra.co.id";
+		// $data['contact_name'] = 'Frein Diana';
+		// $data['item'] = 'P2K3';
+		// $data['nomor_izin'] = 'SK/2019';
+		// $data['expired_date'] = Date('d-m-Y');
+		// $data['status'] = '56 Hari';
+		// $data['jenis_izin'] = 'Mou';
+		// $data['area'] = 'Plant 2';
+		// $data['subject'] = 'LCS Information [NO REPLY]';
+		// Mail::to("renaldy.rizki.tif415@polban.ac.id")->send(new ReportEmail($data));
+        // $schedule->command(new SendTodoReminders())->dailyAt('9:00');
     }
 
     /**

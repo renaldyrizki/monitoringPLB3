@@ -30,6 +30,13 @@
                 <input required type="text" name="name" id="name" class="form-control" value="" placeholder="Nama Pengguna">
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="npk" class="col-sm-2 control-label">NPK</label>
+            <div class="col-sm-6">
+                <input required type="text" name="npk" id="npk" class="form-control" value="" placeholder="NPK">
+            </div>
+        </div>
         
         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Email</label>

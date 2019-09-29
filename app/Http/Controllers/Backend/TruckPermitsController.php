@@ -37,8 +37,11 @@ class TruckPermitsController extends Controller{
         $data['page_name'] = "Truck Permits Control";
         $data['page_description'] = "Tabel Data";
 
-        // $model = penyimpananLimbah::get()->paginate(10);
-        $model = Truck::paginate(2);
+        if(Auth::user()->isAdmin == 1){
+            $model = Truck::where('plant_id', Auth::user()->plant_id)->orderBy('id_truck', 'desc')->paginate(10);
+        }else{
+            $model = Truck::orderBy('id_truck', 'desc')->paginate(10);
+        }
         $data['data'] = $model;
         // $data['allData'] = Truck::paginate(2);
 
@@ -138,6 +141,7 @@ class TruckPermitsController extends Controller{
         $TruckPermits->kartu_pengawasan_nomor = $request->kartu_pengawasan;
         $TruckPermits->kartu_pengawasan_tanggal_terbit = $request->kartu_pengawasan_tanggal_terbit;
         $TruckPermits->kartu_pengawasan_tanggal_habis = $request->kartu_pengawasan_tanggal_habis;
+        $TruckPermits->plant_id = Auth::user()->plant_id;
 
         $TruckPermits->save();
 

@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('npk')->unique();
             $table->string('password');
             $table->boolean('isAdmin')->default(false);
             $table->integer('plant_id');

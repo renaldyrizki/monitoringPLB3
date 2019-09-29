@@ -11,9 +11,12 @@
             <div class="card-header">
                 <div class="d-flex no-block">
                     <div class="ml-auto">
-                        {{-- <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::permitsControl_add') }}">
-                            <i class="fa fa-plus"></i> Buat
-                        </a> --}}
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::permitsControl_add') }}">
+                            <i class="fa fa-plus"></i> Tambah Data
+                        </a>
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::kirimEmail_permits')}}">
+                            <i class="fa fa-envelope"></i> Report Email
+                        </a>
                     </div>
                 </div>
             </div>
