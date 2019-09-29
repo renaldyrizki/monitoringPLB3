@@ -177,46 +177,81 @@ class PenyimpananLimbahB3Controller extends Controller{
         $last_day_this_month  = date('Y-m-t');
         $data = penyimpananLimbah::whereBetween('tanggal_expired', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_expired', 'ASC')->get();
         
-        Excel::create('Filename', function($excel) {
-            $excel->sheet('Sheet 1',function($sheet){
-                $sheet->fromArray([['A','B'],['C','D']]);
-            });
+
+        $date = 'Jun-19';
+        $dummy = [7, 'Alumunium', '03-Jan-19', 'Produksi', 3.701, '03-Apr-19', '03-Jan-19', 3.701, 'PT AAA', 'AFW 000 8599', 0];
+       
+        
+        Excel::create('Logbook Lembar Kegiatan Penyimpanan Limbah B3', function($excel) use ($date, $dummy){
             // Set the title
-            $excel->setTitle('Our new awesome title');
+            $excel->setTitle('Logbook Lembar Kegiatan Penyimpanan Limbah B3')
+                  ->setCreator('Renaldy Aldy')
+                  ->setCompany('Merah Muda')
+                  ->setDescription('Lembar Kegiatan Penyimpanan Limbah B3');
             
-            // Chain the setters
-            $excel->setCreator('Maatwebsite')
-                  ->setCompany('Maatwebsite');
+
+            $excel->sheet($date, function($sheet) use ($date, $dummy){
+                $sheet->appendRow(['LEMBAR KEGIATAN PENYIMPANAN LIMBAH BAHAN BERBAHAYA DAN BERACUN']);
+                $sheet->appendRow(['PT. ASTRA DAIHATSU MOTOR - ENGINE PLANT']);
+                $sheet->appendRow([$date]);
+                $sheet->appendRow([
+                    'MASUKNYA LIMBAH B3 KE TPS',
+                    'KELUARNYA LIMBAH B3 DARI TPS',
+                    'SISA'
+                ]);
+                $sheet->appendRow([
+                    'No.',
+                    'Jenis Limbah B3 Masuk',
+                    'Tanggal Masuk Limbah B3',
+                    'Sumber limbah B3',
+                    'Jumlah Limbah B3 Masuk (drum)',
+                    'Maksimal Penyimpanan s/d Tanggal; (t=0 + 90hr, 180hr)',
+                    'Tanggal Keluar Limbah B3',
+                    'Jumlah Limbah B3 (drum)',
+                    'Tujuan Penyerahan',
+                    'Bukti Nomor Dokumen',
+                    'Sisa Limbah B3 yang ada di TPS (drum)',
+                ]);
+                $sheet->appendRow(['(A)','(B)','(C)','(D)','(E)','(F)','(G)','(H)','(I)','(J)','(K)']);
+                $sheet->setAllBorders('thin');
+
+
+                $sheet->mergeCells('A1:K1');
+                $sheet->cells('A1:K1', function($cells) {
+                    $cells->setBackground('#B5B5B5');
+                    $cells->setAlignment('center');
+                    $cells->setFontWeight('bold');
+                });
+                $sheet->mergeCells('A2:K2');
+                $sheet->cells('A2:K2', function($cells) {
+                    $cells->setAlignment('center');
+                });
+                $sheet->mergeCells('A3:K3');
+                $sheet->cells('A3:K3', function($cells) {
+                    $cells->setAlignment('center');
+                });
+
+                $sheet->mergeCells('A4:F4');
+                $sheet->mergeCells('G4:J4');
+                $sheet->cells('A4:K4', function($cells) {
+                    $cells->setBackground('#B5B5B5');
+                    $cells->setAlignment('center');
+                    $cells->setFontWeight('bold');
+                });
+
+                // INSERT DATA HERE
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+                $sheet->appendRow($dummy);
+            });
             
-              // Call them separately
-              $excel->setDescription('A demonstration to change the file properties');
-            })->download('xls');
-        // return $data;
-        // MaatExcel::create('Filename', function($excel) {
-        //     $excel->setTitle("ThisTitle")->setCreator("siGanteng");
-        //     $excel->sheet('Sheetname', function($sheet) {
-        //         // return $sheet;
-        //         $sheet->fromArray(array(
-        //             array('data1', 'data2'),
-        //             array('data3', 'data4')
-        //         ));
-        //     });
-        // })->export('xls');
-        // MaatExcel::download(['a','b'],'hitut.xlsx');
-        // MaatExcel::create("Customers", function ($excel){
-        //     $excel->setTitle("Example Sheet");
-        //     $excel->sheet("Sheet 1", function ($sheet){
-        //           $sheet->row(1, array("NO.","NAME","DATE", "ADDRESS"));
-        //       });
-        //     })->download('xls');
-        // $users = $data;
-        // MaatExcel::create('user-export', function ($excel) use ($users) {
-        //     $excel->sheet('Users', function ($sheet) use ($users) {
-        //         $sheet->loadView('xls.users', [
-        //             'users' => $users
-        //         ]);
-        //     });
-        // })->download();
+            
+        })->download('xls');
+
         return $data;
         if($data->lampiran_dokumen){
             $headers = array(
