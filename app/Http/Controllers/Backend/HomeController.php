@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\PermitsControl;
 use App\Truck;
-
+use App\mouControl;
 class HomeController extends Controller{
     /**
      * Show the application dashboard.
@@ -27,13 +27,34 @@ class HomeController extends Controller{
         $data['page_description'] = "Control panel";
         $truck = [];
         $permits = [];
+        $mou = [];
+        $data = mouControl::get();
+        $mou['ok'] = 0;
+        $mou['warning'] = 0;
+        $mou['expired'] = 0;
+        foreach ($data as $key => $value) {
+            $habis = date("Y-m-d", strtotime($value->tanggal_habis_berlaku_kontrak));
+            $batas = date("Y-m-d", strtotime("-2 month", strtotime($value->tanggal_habis_berlaku_kontrak)));
+            $hariIni = date("Y-m-d", strtotime("now"));
+            if( ($hariIni > $batas) and ($hariIni <= $habis)){
+                $mou['warning'] = $mou['warning'] + 1;
+            }elseif($hariIni > $habis){
+                $mou['expired'] = $mou['expired'] + 1;
+            }elseif($hariIni <= $batas){
+                $mou['ok'] = $mou['ok'] + 1;
+            }
+        }
+        if(count($data) > 0){
+            $mou['total'] = $key+1;
+        }else{
+            $mou['total'] = 0;
+        }
 
         $data = PermitsControl::get();
         $permits['ok'] = 0;
         $permits['warning'] = 0;
         $permits['expired'] = 0;
         foreach ($data as $key => $value) {
-            $terbit = date("Y-m-d", strtotime($value->tanggal_terbit));
             $habis = date("Y-m-d", strtotime($value->tanggal_habis_berlaku));
             $batas = date("Y-m-d", strtotime("-2 month", strtotime($value->tanggal_habis_berlaku)));
             $hariIni = date("Y-m-d", strtotime("now"));
@@ -58,7 +79,6 @@ class HomeController extends Controller{
         $truck['notsubmitted'] = 0;
         foreach ($data as $key => $value) {
             if ($value->kartu_pengawasan_tanggal_habis and $value->kartu_pengawasan_tanggal_terbit) {
-                $terbit = date("Y-m-d", strtotime($value->kartu_pengawasan_tanggal_terbit));
                 $habis = date("Y-m-d", strtotime($value->kartu_pengawasan_tanggal_habis));
                 $batas = date("Y-m-d", strtotime("-2 month", strtotime($value->kartu_pengawasan_tanggal_habis)));
                 $hariIni = date("Y-m-d", strtotime("now"));
@@ -81,6 +101,7 @@ class HomeController extends Controller{
         $data = [];
         $data['truck'] = $truck;
         $data['permits'] = $permits;
+        $data['mou'] = $mou;
 
         // return $data['permits'];
 

@@ -62,8 +62,12 @@ class ManifestControlController extends Controller{
             $queries['sort'] = 'asc';
         }
         $pengangkutan = $pengangkutan->orderBy($sort, $request->sort);
-
-        $model = pengangkutanLimbah::paginate(2);
+        if(Auth::user()->isAdmin == 1){
+            $model = $pengangkutan->where('plant_id', Auth::user()->plant_id)->paginate(10)->appends($queries);
+        }else{
+            $model = $pengangkutan->paginate(10)->appends($queries);
+        }
+        
         $data['data'] = $model;
         $data['queries'] = $queries; 
         

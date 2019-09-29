@@ -71,7 +71,12 @@ class PermitsControlController extends Controller{
             $queries['sort'] = 'asc';
         }
         $permits = $permits->orderBy($sort, $request->sort);
-        $model = $permits->paginate(2)->appends($queries);
+        if(Auth::user()->isAdmin == 1){
+            $model = $permits->where('plant_id', Auth::user()->plant_id)->paginate(10)->appends($queries);
+        }else{
+            $model = $permits->paginate(10)->appends($queries);
+        }
+        // $model = $permits->paginate(2)->appends($queries);
         
         // $model = PermitsControl::orderBy('id_permits', 'desc')->get();
         $data['data'] = $model;
@@ -124,6 +129,7 @@ class PermitsControlController extends Controller{
         $PermitsControl->tanggal_terbit = $request->tanggal_terbit_izin;
         $PermitsControl->tanggal_habis_berlaku = $request->tanggal_habis_izin;
         $PermitsControl->lampiran_dokumen = $request->nama_lampiran_dokumen;
+        $PermitsControl->plant_id = Auth::user()->plant_id;
         // return $PermitsControl;
         $PermitsControl->save();
 

@@ -40,25 +40,29 @@ class PenyimpananLimbahB3Controller extends Controller{
         $data['page_name'] = "Penyimpanan Data Limbah B3";
         $data['page_description'] = "Tabel Data";
         // $model = penyimpananLimbah::get()->paginate(10);
-        $model = penyimpananLimbah::paginate(2);
+        $model = penyimpananLimbah::paginate(10);
         $data['data'] = $model;
-        $data['allData'] = penyimpananLimbah::get();
+        // $data['allData'] = penyimpananLimbah::get();
 
         // return $data;
         return view('backend.PenyimpananLimbahB3.index', $data);
     }
 
-    public function logbook(){
-        $data['page_name'] = "Penyimpanan Data Limbah B3";
-        $data['page_description'] = "Tabel Data";
-        // $model = penyimpananLimbah::get()->paginate(10);
-        $model = penyimpananLimbah::orderBy('id_penyimpanan', 'desc')->get();
-        $data['data'] = $model;
-        $data['allData'] = penyimpananLimbah::get();
+    // public function logbook(){
+    //     $data['page_name'] = "Penyimpanan Data Limbah B3";
+    //     $data['page_description'] = "Tabel Data";
+    //     // $model = penyimpananLimbah::get()->paginate(10);
+    //     if(Auth::user()->isAdmin == 1){
+    //         $model = penyimpananLimbah::where('plant_id', Auth::user()->plant_id)->orderBy('id_penyimpanan', 'desc')->get()->paginate(10);
+    //     }else{
+    //         $model = penyimpananLimbah::orderBy('id_penyimpanan', 'desc')->get()->paginate(10);
+    //     }
+    //     $data['data'] = $model;
+    //     // $data['allData'] = penyimpananLimbah::get();
 
-        // return $data;
-        return view('backend.PenyimpananLimbahB3.index', $data);
-    }
+    //     // return $data;
+    //     return view('backend.PenyimpananLimbahB3.index', $data);
+    // }
 
     public function add(){
         $data['page_name'] = "Penyimpanan Limbah B3";
@@ -99,7 +103,7 @@ class PenyimpananLimbahB3Controller extends Controller{
         $penyimpananLimbah->tanggal_expired = Date('Y-m-d', strtotime('+'.$request->masa_simpan.' day', strtotime($request->tanggal_penyimpanan)));
         $penyimpananLimbah->sumber_limbah = $request->sumber_limbah;
         $penyimpananLimbah->total_penyimpanan = $request->total_penyimpanan;
-        // $penyimpananLimbah->satuan = $request->satuan;
+        $penyimpananLimbah->plant_id = Auth::user()->plant_id;
         // $penyimpananLimbah->status = $request->status;
         // $penyimpananLimbah->user()->associate($user);
         // return $penyimpananLimbah;

@@ -16,8 +16,8 @@ class ManajemenPenggunaController extends Controller{
     }
 
     public function index(Request $request){
-        $data['page_name'] = "Manifest Control";
-        $data['page_description'] = "List Manifest";
+        $data['page_name'] = "Manajemen Pengguna";
+        $data['page_description'] = "List Pengguna";
 
         $data['plant'] = [
             'P2 - Engine Plant',
@@ -48,6 +48,7 @@ class ManajemenPenggunaController extends Controller{
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'npk' => 'required|string',
             'password' => 'required|string|min:6',
             "isAdmin" => 'required',
             "plant_id" => 'required'
@@ -56,6 +57,7 @@ class ManajemenPenggunaController extends Controller{
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->npk = $request->npk;
         $user->password = bcrypt($request->password);
         $user->isAdmin = $request->isAdmin;
         $user->plant_id = $request->plant_id;
@@ -83,6 +85,7 @@ class ManajemenPenggunaController extends Controller{
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
+            'npk' =>  'required|string',
             "isAdmin" => 'required',
             "plant_id" => 'required'
         ]);
@@ -90,6 +93,7 @@ class ManajemenPenggunaController extends Controller{
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->npk = $request->npk;
         $user->isAdmin = $request->isAdmin;
         $user->plant_id = $request->plant_id;
         $user->save();

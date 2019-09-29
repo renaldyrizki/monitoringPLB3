@@ -5,12 +5,17 @@
 @endsection
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="icon fa fa-check"></i> {{ session('success') }}
-        </div>
-    @endif
+@if ($errors->any())
+<div class="alert alert-warning alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-warning"></i> Perhatian!</h4>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     <form action="{{ route('backend::truckPermits_save') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
         <div class="form-group" row>

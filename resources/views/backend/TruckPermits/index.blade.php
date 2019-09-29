@@ -13,8 +13,11 @@
             <div class="card-header">
                 <div class="d-flex no-block">
                     <div class="ml-auto" style="margin-left: 0.2in; margin-bottom: 10px;">
-                        <a href="{{ route('backend::truckPermits_add') }}" class="btn btn-sm btn-success btn-md" href="#">
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::truckPermits_add') }}">
                             <i class="fa fa-plus"></i> Tambah Data Truk
+                        </a>
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::kirimEmail_truck')}}">
+                            <i class="fa fa-envelope"></i> Report Email
                         </a>
                     </div>
                 </div>

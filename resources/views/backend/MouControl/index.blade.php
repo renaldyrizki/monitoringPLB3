@@ -10,6 +10,18 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <div class="d-flex no-block">
+                    <div class="ml-auto">
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::mouControl_add') }}">
+                            <i class="fa fa-plus"></i> Tambah Data Truk
+                        </a>
+                        <a class="btn btn-sm btn-success btn-md" href="{{ route('backend::kirimEmail_mou')}}">
+                            <i class="fa fa-envelope"></i> Report Email
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible">
@@ -20,10 +32,10 @@
                 <div id="filter" style="margin-top: 0.1in; margin-bottom: 0.1in;">
                     <form class="form-inline" action="{{ route('backend::mouControl') }}" method="GET">
                         <div class="form-group" row>
-                            <input  type="text" name="kata_kunci" class="form-control form-control-sm" placeholder="Kata Kunci" style="margin-left: 0; border-width: 1px;">
+                            <input  type="text" name="kata_kunci" value="{{Request::get("kata_kunci")}}" class="form-control form-control-sm" placeholder="Kata Kunci" style="margin-left: 0; border-width: 1px;">
                         </div>
                         <div class="form-group" row>
-                            <input type="text" name="nomor_kontrak" class="form-control form-control-sm" placeholder="Nomor Kontrak" style="margin-left: 0; border-width: 1px;">
+                            <input type="text" value="{{Request::get("nomor_kontrak")}}"  name="nomor_kontrak" class="form-control form-control-sm" placeholder="Nomor Kontrak" style="margin-left: 0; border-width: 1px;">
                         </div>
                         <div class="form-group" row>
                             <select name="status" class="form-control">
@@ -51,8 +63,8 @@
                             <button type="submit" class="btn btn-success btn-sm">
                                 <i class="fa fa-search"></i> Cari
                             </button>
-                            {{-- <input id="sbmt" type="submit" class="btn btn-success btn-sm fa fa-plus" value="Cari"> --}}
-                            <a class="btn btn-success btn-sm" role="button" href=""><i class="fa fa-recycle"></i> Reset</a>
+                            {{-- <input value="reset"  type="submit" class="btn btn-success btn-sm"> --}}
+                            <a class="btn btn-success btn-sm" role="button" href="{{ route('backend::mouControl') }}"><i class="fa fa-recycle"></i> Reset</a>
                         </div>
                     </form>
                 </div>
@@ -101,10 +113,17 @@
                                 {{ $res->tanggal_habis_berlaku_kontrak}}
                              </td>
                             <td>
-                                @if ($res->status_kontrak==1)
-                                    Diterima
-                                @else
-                                    Belum Diterima
+                                @php 
+                                    $habis = date("Y-m-d", strtotime($res->tanggal_habis_berlaku_kontrak));
+                                    $batas = date("Y-m-d", strtotime("-2 month", strtotime($res->tanggal_habis_berlaku_kontrak)));
+                                    $hariIni = date("Y-m-d", strtotime("now"));
+                                @endphp
+                                @if( ($hariIni > $batas) and ($hariIni <= $habis))
+                                    Warning
+                                @elseif ($hariIni > $habis)
+                                    Expired
+                                @elseif ($hariIni <= $batas)
+                                    OK
                                 @endif
                             </td>
                         </tr>
@@ -135,6 +154,21 @@
 @endsection
 
 @push('script')
+<script type="text/javascript">
+    function resetform() {
+        elements = [];
+        elements = document.getElementsByClassName("form-control");
+        for(var i=0; i<elements.length ; i++){
+            console.log(elements[i].name);
+            if (elements[i].name == 'status' || elements[i].name == 'status' || elements[i].name == 'sort'){
+                elements[i].selectedIndex = 0 ;
+            }else{
+                elements[i].value = "" ;
+            }
+        }
+        
+    }
+</script>
 <script type="text/javascript">
     function deleteData(id){
         console.log(id);

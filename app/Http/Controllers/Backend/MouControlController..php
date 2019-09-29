@@ -76,7 +76,12 @@ class MouControlController extends Controller{
             $queries['sort'] = 'asc';
         }
         $mou = $mou->orderBy($sort, $request->sort);
-        $model = $mou->paginate(2)->appends($queries);
+        if(Auth::user()->isAdmin == 1){
+            $model = $mou->where('plant_id', Auth::user()->plant_id)->paginate(10)->appends($queries);
+        }else{
+            $model = $mou->paginate(10)->appends($queries);
+        }
+        // $model = $mou->where('plant_id', Auth::user()->plant_id)->paginate(2)->appends($queries);
         
         $data['data'] = $model;
         $data['filter'] = $queries; 
@@ -167,6 +172,7 @@ class MouControlController extends Controller{
         $MouControl->nomor_kontrak = $request->nomor_kontrak;
         $MouControl->tanggal_terbit_kontrak = $request->tanggal_terbit_kontrak;
         $MouControl->tanggal_habis_berlaku_kontrak = $request->tanggal_habis_berlaku_kontrak;
+        $MouControl->plant_id = Auth::user()->plant_id;
         $MouControl->save();
 
         return redirect()->route($this->routePath)->with('success', "Data berhasil di simpan.");

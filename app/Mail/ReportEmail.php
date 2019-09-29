@@ -16,9 +16,9 @@ class ReportEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,10 +28,7 @@ class ReportEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('renaldy.rizki@gmail.com')->view('backend.Email.viewEmail')
-                   ->with(
-                    [
-                        'nama' => 'Renaldy',
-                    ]);
+        return $this->from('renaldy.rizki@gmail.com')->subject($this->data['subject'])->view('backend.Email.viewEmail')
+                   ->with($this->data);
     }
 }

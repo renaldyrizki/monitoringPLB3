@@ -22,7 +22,7 @@ Route::get('/', 'HomeController@index')->name('home');
 // Routing backend administrator
 $router->group([
     'namespace'  => 'Backend',
-    'prefix'     => config('larakuy.prefix_admin', 'backend'), 
+    // 'prefix'     => config('l', ''), 
     'as'         => 'backend::',
     'middleware' => 'auth'
     ], function ($router) {
@@ -31,11 +31,12 @@ $router->group([
     // Dashboard
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
     Route::get('/kirimEmail','EmailController@index')->name('kirimEmail');
-    // Route::get('/permitsControl', 'HomeController@permitsControl')->name('permitsControl');
-    // Route::get('/mouControl', 'HomeController@mouControl')->name('mouControl');
-    // Route::get('/tambahTruck', 'TruckPermitsController@tambahTruck')->name('tambahTruck');
-    // Route::get('/listTruck', 'TruckPermitsController@index')->name('listTruck');
-    // Route::get('/dataTruck', 'TruckPermitsController@dataTruck')->name('dataTruck');
+    Route::get('/kirimEmail/truckPermits','EmailController@truckPermitsReport')->name('kirimEmail_truck');
+    Route::get('/kirimEmail/permits','EmailController@permitsReport')->name('kirimEmail_permits');
+    Route::get('/kirimEmail/mou','EmailController@mouReport')->name('kirimEmail_mou');
+    Route::get('/kirimEmail/truckPermits/Automatic','EmailController@truckPermitsReportAutomatic')->name('kirimEmail_truckAutomatic');
+    Route::get('/kirimEmail/permits/Automatic','EmailController@permitsReportAutomatic')->name('kirimEmail_permitsAutomatic');
+    Route::get('/kirimEmail/mou/Automatic','EmailController@mouReportAutomatic')->name('kirimEmail_mouAutomatic');
 
     //manifest
     Route::get('/manifestControl', 'ManifestControlController@index')->name('manifestControl');

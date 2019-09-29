@@ -84,7 +84,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>3</h3>
+                    <h3>{{$mou['total']}}</h3>
     
                     <p>Total Mou</p>
                 </div>
@@ -99,7 +99,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>3</h3>
+                    <h3>{{$mou['ok']}}</h3>
                     <p>Mou Oke</p>
                 </div>
                 <div class="icon">
@@ -113,7 +113,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$mou['warning']}}</h3>
     
                     <p>Mou Warning</p>
                 </div>
@@ -128,7 +128,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$mou['expired']}}</h3>
                     <p>Mou Expired</p>
                 </div>
                 <div class="icon">
