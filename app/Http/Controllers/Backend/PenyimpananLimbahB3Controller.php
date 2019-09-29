@@ -191,14 +191,23 @@ class PenyimpananLimbahB3Controller extends Controller{
                   ->setCompany('Merah Muda')
                   ->setDescription('Lembar Kegiatan Penyimpanan Limbah B3');
             
-
+                  
+                  
             $excel->sheet($date, function($sheet) use ($date, $dummy){
                 $sheet->appendRow(['LEMBAR KEGIATAN PENYIMPANAN LIMBAH BAHAN BERBAHAYA DAN BERACUN']);
                 $sheet->appendRow(['PT. ASTRA DAIHATSU MOTOR - ENGINE PLANT']);
                 $sheet->appendRow([$date]);
                 $sheet->appendRow([
                     'MASUKNYA LIMBAH B3 KE TPS',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
                     'KELUARNYA LIMBAH B3 DARI TPS',
+                    '',
+                    '',
+                    '',
                     'SISA'
                 ]);
                 $sheet->appendRow([
@@ -232,7 +241,7 @@ class PenyimpananLimbahB3Controller extends Controller{
                 $sheet->cells('A3:K3', function($cells) {
                     $cells->setAlignment('center');
                 });
-
+    
                 $sheet->mergeCells('A4:F4');
                 $sheet->mergeCells('G4:J4');
                 $sheet->cells('A4:K4', function($cells) {
