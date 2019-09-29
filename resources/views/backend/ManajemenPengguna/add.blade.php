@@ -1,7 +1,7 @@
 @extends('layouts.backend.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('penyimpananLimbahB3_add') !!}
+    {!! Breadcrumbs::render('manajemenPengguna_add') !!}
 @endsection
 
 @section('content')
@@ -11,54 +11,61 @@
             <i class="icon fa fa-check"></i> {{ session('success') }}
         </div>
     @endif
-    <form action="{{ route('backend::penyimpananLimbahB3_save') }}" class="form-horizontal" method="post">
+    @if ($errors->any())
+        <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Perhatian</h3>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="{{ route('backend::manajemenPengguna_save') }}" class="form-horizontal" method="post">
         {{ csrf_field() }}
-        <div class="form-group" row>
-            <label for="jenis_limbah" class="col-sm-2 control-label">Jenis Limbah</label>
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Nama</label>
             <div class="col-sm-6">
-                <select name="jenis_limbah" class="form-control" required>
-                    @foreach($jenis_limbah as $key => $value)
+                <input required type="text" name="name" id="name" class="form-control" value="" placeholder="Nama Pengguna">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-6">
+                <input required type="email" name="email" id="email" class="form-control" value="" placeholder="example@domain.com">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-6">
+                <input required type="password" name="password" id="password" class="form-control" value="" placeholder="password">
+            </div>
+        </div>
+
+        <div class="form-group" row>
+            <label for="isAdmin" class="col-sm-2 control-label">Role</label>
+            <div class="col-sm-6">
+                <select name="isAdmin" class="form-control" required>
+                    <option value="0">User</option>
+                    <option value="1">Admin</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" row>
+            <label for="plant_id" class="col-sm-2 control-label">Plant</label>
+            <div class="col-sm-6">
+                <select name="plant_id" class="form-control" required>
+                    @foreach($plant as $key => $value)
                         <option value={{$key}}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-    
-        <div class="form-group">
-            <label for="tanggal_penyimpanan" class="col-sm-2 control-label">Tanggal Penyimpanan</label>
-            <div class="col-sm-6">
-                <input required type="text" name="tanggal_penyimpanan" data-date-format='yyyy-mm-dd' value="" class="form-control pull-right datepicker" id="tanggal_penyimpanan" placeholder="Tanggal Penyimpanan">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="masa_simpan" class="col-sm-2 control-label">Masa Simpan (Hari)</label>
-            <div class="col-sm-6">
-                <input required type="number" min=1 name="masa_simpan" id="masa_simpan" class="form-control" value="" placeholder="Masa Simpan Dalam Hari">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="sumber_limbah" class="col-sm-2 control-label">Sumber Limbah</label>
-            <div class="col-sm-6">
-                <input required type="text" name="sumber_limbah" id="sumber_limbah" class="form-control" value="" placeholder="Sumber Limbah">
-            </div>
-        </div>
         
-        <div class="form-group">
-            <label for="total_penyimpanan" class="col-sm-2 control-label">Total yang Disimpan</label>
-            <div class="col-sm-4">
-                <input required type="number" min=0 name="total_penyimpanan" id="total_penyimpanan" class="form-control" value="" placeholder="Berat dalam satuan KG">
-            </div>
-            <div class="col-sm-2">
-                <select name="satuan" class="form-control" required>
-                    @foreach($satuan as $sat)
-                        <option value={{ $sat }} >{{ $sat }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" class="btn btn-success btn-md" name="simpan" value="Simpan">

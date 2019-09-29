@@ -10,6 +10,12 @@
     {{-- <hr style="border-top-color: black"> --}}
 
 <form action="{{ route('backend::manifestControl_update', ['id' => $data->id_pengangkutan]) }}" class="form-horizontal" method="post">
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="icon fa fa-check"></i> {{ session('success') }}
+        </div>
+    @endif
     {{ csrf_field() }}
     <input name="_method" type="hidden" value="PATCH">
     {{-- {{ method_field('PATCH') }} --}}

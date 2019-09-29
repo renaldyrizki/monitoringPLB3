@@ -22,6 +22,7 @@ class CreatePengangkutanLimbahTabel extends Migration
             $table->string('perusahaan_pengangkut');
             $table->string('tujuan_pemanfaatan');
             $table->boolean('status_pengangkutan');
+            $table->integer('plant_id');
         });
     }
 

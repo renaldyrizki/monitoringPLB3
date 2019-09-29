@@ -16,6 +16,7 @@ use DB;
 use Date;
 // use App\User;
 use App\penyimpananLimbah;
+use App\pengangkutanLimbah;
 
 
 
@@ -175,6 +176,7 @@ class PenyimpananLimbahB3Controller extends Controller{
     public function logbookDownload(){
         $first_day_this_month = date('Y-m-01');
         $last_day_this_month  = date('Y-m-t');
+        $data = pengangkutanLimbah::whereBetween('tanggal_pengangkutan', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_pengangkutan', 'ASC')->get();
         $data = penyimpananLimbah::whereBetween('tanggal_expired', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_expired', 'ASC')->get();
         
 

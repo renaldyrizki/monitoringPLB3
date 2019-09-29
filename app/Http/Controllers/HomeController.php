@@ -26,10 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $truck = [];
-        $truck['truck_total'] = Truck::count();
-        return $truck['truck_total'];
-
         return redirect()->route('backend::dashboard');
     }
 }

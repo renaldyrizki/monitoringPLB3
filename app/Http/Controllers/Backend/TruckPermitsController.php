@@ -105,9 +105,9 @@ class TruckPermitsController extends Controller{
             if($request->file($File)){
                 $lampiran = $request->file($File);
                 $nama_lampiran = $request->no_polisi."_".$File."_".str_replace(" ","_",$lampiran->getClientOriginalName());
-                $lampiran->move(public_path("uploads/TruckPermitsControl/"), $nama_lampiran);
+                $lampiran->move(public_path("uploads/LampiranTruckPermitsControl/"), $nama_lampiran);
                 $request->request->add([
-                    "nama_".$File => 'uploads/TruckPermitsControl/'.$nama_lampiran
+                    "nama_".$File => 'uploads/LampiranTruckPermitsControl/'.$nama_lampiran
                 ]);
                 $TruckPermits[$File] = $request["nama_".$File];
             }

@@ -13,8 +13,22 @@ class CreateMouTable extends Migration
      */
     public function up()
     {
-        Schema::create('mou', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('mou_control', function (Blueprint $table) {
+            $table->increments('id_mou');
+            $table->string('perusahaan_pengelola_lanjut');
+            $table->boolean('status_kontrak');
+            $table->string('tipe_pengelolaan');
+            $table->string('jenis_limbah');
+            $table->string('surat_pernyataan_tidak_masalah');
+            $table->string('nomor_izin_perusahaan');
+            $table->date('tanggal_kontrak_perusahaan');
+            $table->date('tanggal_habis_berlaku_perusahaan');
+            $table->string('lampiran_perusahaan');
+            $table->string('nomor_kontrak')->unique();
+            $table->date('tanggal_terbit_kontrak');
+            $table->date('tanggal_habis_berlaku_kontrak');
+            $table->string('lampiran_kontrak');
+            $table->integer('plant_id');
             $table->timestamps();
         });
     }
@@ -26,6 +40,6 @@ class CreateMouTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mou');
+        Schema::dropIfExists('mou_control');
     }
 }

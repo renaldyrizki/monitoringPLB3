@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @include('layouts.backend.footer')
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  {{-- <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -131,7 +131,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <!-- /.tab-pane -->
     </div>
-  </aside>
+  </aside> --}}
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
