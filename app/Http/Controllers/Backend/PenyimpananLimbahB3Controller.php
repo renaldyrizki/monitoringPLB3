@@ -180,9 +180,10 @@ class PenyimpananLimbahB3Controller extends Controller{
     public function logbookDownload(){
         $first_day_this_month = date('Y-m-01');
         $last_day_this_month  = date('Y-m-t');
-        $data = pengangkutanLimbah::whereBetween('tanggal_pengangkutan', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_pengangkutan', 'ASC')->get();
-        $data = penyimpananLimbah::whereBetween('tanggal_expired', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_expired', 'ASC')->get();
+        $dataKeluar = pengangkutanLimbah::whereBetween('tanggal_pengangkutan', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_pengangkutan', 'ASC')->get();
+        $dataMasuk = penyimpananLimbah::whereBetween('tanggal_expired', [$first_day_this_month, $last_day_this_month])->orderBy('jenis_limbah', 'ASC')->orderBy('tanggal_expired', 'ASC')->get();
         
+        dd($dataKeluar);
 
         $date = 'Jun-19';
         $dummy = [7, 'Alumunium', '03-Jan-19', 'Produksi', 3.701, '03-Apr-19', '03-Jan-19', 3.701, 'PT AAA', 'AFW 000 8599', 0];
@@ -191,8 +192,8 @@ class PenyimpananLimbahB3Controller extends Controller{
         Excel::create('Logbook Lembar Kegiatan Penyimpanan Limbah B3', function($excel) use ($date, $dummy){
             // Set the title
             $excel->setTitle('Logbook Lembar Kegiatan Penyimpanan Limbah B3')
-                  ->setCreator('Renaldy Aldy')
-                  ->setCompany('Merah Muda')
+                //   ->setCreator('Renaldy Aldy')
+                //   ->setCompany('Merah Muda')
                   ->setDescription('Lembar Kegiatan Penyimpanan Limbah B3');
             
 

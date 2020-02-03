@@ -16,7 +16,6 @@
     </ul>
 </div>
 @endif
-    @endif
     <form action="{{ route('backend::pengangkutanLimbahB3_save') }}" class="form-horizontal" method="post">
         {{ csrf_field() }}
         <div class="form-group" row>
